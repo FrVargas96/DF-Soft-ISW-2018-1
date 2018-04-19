@@ -1,0 +1,19 @@
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\Proyecto ISW.exe.config
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\Proyecto ISW.exe
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\Proyecto ISW.pdb
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.csprojResolveAssemblyReference.cache
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto_ISW.Form1.resources
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto_ISW.Properties.Resources.resources
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.csproj.GenerateResource.cache
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.csproj.CoreCompileInputs.cache
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.exe
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.pdb
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\DynamicInterop.dll
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.dll
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.FSharp.dll
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.NativeLibrary.dll
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\DynamicInterop.xml
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.xml
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.FSharp.xml
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\bin\Debug\RDotNet.NativeLibrary.xml
+G:\Proyectos\ISW\Proyecto ISW\Proyecto ISW\obj\Debug\Proyecto ISW.csproj.CopyComplete
