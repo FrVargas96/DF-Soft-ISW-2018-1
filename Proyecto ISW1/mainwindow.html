@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=4, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <title>DF Actions</title>
+</head>
+<body class="text-center" style="background-color:#0d0d0d;">
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="javascript:void(0)" onclick="showIntro()" data-toggle="collapse" data-target="#intro" aria-expanded="false" aria-controls="intro">DF Actions</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navb">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" data-target="#black" aria-expanded="false" aria-controls="black" onclick="hideElse(1)">Black-Scholes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" data-target="#monteCarlo" aria-expanded="false" aria-controls="monteCarlo" onclick="hideElse(2)">Montecarlo</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search">
+                <button class="btn btn-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container text-center" style="background-color: #696969; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+        <div class="collapse show" id="intro">
+            <div class="jumbotron" id="bloque" style="background-color: #696969; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;">
+                <h1>Bienvenido a DF Actions</h1>
+                <p>Con DF Actions podra obtener las mejores estimaciones... </p>
+            </div>
+        </div>
+
+        <!-- Black-Scholes -->
+        <div class="collapse" id="black">
+            <div class="container">
+                <div id="formBlack">
+                    <div class="row">
+                        <div class="col" style="margin-top:5px">
+                            <label style="font-weight: bold;">Empresa: </label>
+                            <div class="form-group" id="subirB">
+                                <input type="text" class="form-control" id="empresa">
+                                <button type="button" class="btn btn-danger" onclick="subirArch(1)">Subir CSV</button>
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="tiempo" style="font-weight: bold;">Tiempo:</label>
+                                <input type="text" class="form-control" id="tiempo">
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="strike" style="font-weight: bold;">Strike:</label>
+                                <input type="text" class="form-control" id="strike">
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="riskfree" style="font-weight: bold;">Tasa libre de riego:</label>
+                                <input type="text" class="form-control" id="riskfree">
+                            </div>
+                            <button class="btn btn-success btn-block" style="margin-bottom: 10px" onclick="black()">Calcular</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Montecarlo -->
+        <div class="collapse" id="monteCarlo">
+            <div class="container">
+                <div id="formMonte">
+                    <div class="row">
+                        <div class="col" style="margin-top:5px">
+                            <label style="font-weight: bold;">Empresa: </label>
+                            <div class="form-group" id="subirM">
+                                <input type="text" class="form-control" id="empresaM">
+                                <button type="button" class="btn btn-danger" onclick="subirArch(3)">Subir CSV</button>
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="tiempoM" style="font-weight: bold;">Tiempo:</label>
+                                <input type="text" class="form-control" id="tiempoM">
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="strikeM" style="font-weight: bold;">Strike:</label>
+                                <input type="text" class="form-control" id="strikeM">
+                            </div>
+                        </div>
+                        <div class="col" style="margin-top:5px">
+                            <div class="form-group">
+                                <label for="riskfreeM" style="font-weight: bold;">Tasa libre de riego:</label>
+                                <input type="text" class="form-control" id="riskfreeM">
+                            </div>
+                            <button class="btn btn-success btn-block" style="margin-bottom: 10px" onclick="montecarlo()">Calcular</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="collapse" id="resultado">
+            <div class="container">
+                <div class="col-1" style="margin-top: 5px" id="resultado">
+
+                </div>
+            </div>
+        </div>
+        <div id="grafico">
+        </div>
+
+    </div>
+</body>
+
+
+<script>
+    function showIntro() {
+        document.getElementById("black").className = "collapse";
+        document.getElementById("monteCarlo").className = "collapse";
+        document.getElementById("intro").className = "collapse";
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("grafico").innerHTML = "";
+
+    }
+
+    function hideElse(valor) {
+        document.getElementById("intro").className = "collapse";
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("grafico").innerHTML = "";
+        if(valor == 1)
+        {
+            document.getElementById("monteCarlo").className = "collapse";
+        }else{
+            document.getElementById("black").className = "collapse";
+        }
+    }
+
+    function subirArch(opcion) {
+        if(opcion == 1)
+        {
+            document.getElementById("subirB").className = "custom-file";
+            document.getElementById("subirB").innerHTML = "";
+            document.getElementById("subirB").innerHTML =
+                '<input type="file" class="custom-file-input" id="empresa">\n' +
+                '<label class="custom-file-label" for="path">Choose file</label>' +
+                '<button class="btn btn-danger" onclick="subirArch(2)">Subir CSV</button>';
+        }else if(opcion == 2){
+            document.getElementById("subirB").className = "form-group";
+            document.getElementById("subirB").innerHTML = "";
+            document.getElementById("subirB").innerHTML =
+                '<input type="text" class="form-control" id="empresa">\n' +
+                '<button class="btn btn-danger" onclick="subirArch(1)">Subir CSV</button>';
+        }else if(opcion == 3){
+        document.getElementById("subirM").className = "form-group";
+        document.getElementById("subirM").innerHTML = "";
+        document.getElementById("subirM").innerHTML =
+            '<input type="file" class="custom-file-input" id="empresaM">\n' +
+            '<label class="custom-file-label" for="path">Choose file</label>' +
+            '<button class="btn btn-danger" onclick="subirArch(4)">Subir CSV</button>';
+        }else if(opcion == 4){
+            document.getElementById("subirM").className = "form-group";
+            document.getElementById("subirM").innerHTML = "";
+            document.getElementById("subirM").innerHTML =
+                '<input type="text" class="form-control" id="empresaM">\n' +
+                '<button class="btn btn-danger" onclick="subirArch(3)">Subir CSV</button>';
+        }
+    }
+</script>
+
+<script>
+    const electron = require("electron");
+    const {ipcRenderer} = electron;
+
+    function black() {
+        const empresa = document.querySelector("#empresa").value;
+        const time = document.querySelector("#tiempo").value;
+        const riskf = document.querySelector("#riskfree").value;
+        const strike = document.querySelector("#strike").value;
+        var empresalist = empresa.split("\\");
+        if(empresalist.length > 1){
+            ipcRenderer.send('calculate:CSVblack', empresalist[2],strike, time, riskf);
+        }else{
+            ipcRenderer.send('calculate:black', empresalist[0],strike, time, riskf);
+        }
+    }
+
+    function montecarlo() {
+        const empresa = document.querySelector("#empresaM").value;
+        const time = document.querySelector("#tiempoM").value;
+        const riskf = document.querySelector("#riskfreeM").value;
+        const strike = document.querySelector("#strikeM").value;
+        var empresalist = empresa.split("\\");
+        if(empresalist.length > 1){
+            ipcRenderer.send('calculate:CSVmonte', empresalist[2],strike, time, riskf);
+        }else{
+            ipcRenderer.send('calculate:monte', empresalist[0],strike, time, riskf);
+        }
+    }
+
+    ipcRenderer.on('resultado:valor', function (e, result) {
+        document.querySelector("#empresa").value = '';
+        document.querySelector("#tiempo").value = '';
+        document.querySelector("#riskfree").value = '';
+        document.querySelector("#strike").value = '';
+
+        document.querySelector("#empresaM").value = '';
+        document.querySelector("#tiempoM").value = '';
+        document.querySelector("#riskfreeM").value = '';
+        document.querySelector("#strikeM").value = '';
+
+        document.getElementById("intro").className = "collapse";
+        document.getElementById("black").className = "collapse";
+        document.getElementById("monteCarlo").className = "collapse";
+
+        document.getElementById("resultado").className = "collapse show";
+
+        var xs = [];
+
+        for(i=0;i<=result.datos.length;i++){
+            xs.push(i);
+        }
+
+        var trace1 = {
+            x: xs,
+            y: result.datos,
+            type: 'scatter'
+        };
+
+        var data = [trace1];
+
+        Plotly.newPlot('grafico', data);
+
+        document.getElementById("resultado").innerHTML = "<h1>EL VALOR ESPERADO ES: $" + result.result + "</h1>";
+    });
+
+</script>
+
+<!-- Scripts para bootstrap -->
+<script>
+    window.$ = window.jQuery = require("./node_modules/jquery/dist/jquery.min.js")
+</script>
+<script src="./node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+</html>
